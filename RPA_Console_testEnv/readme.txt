@@ -11,11 +11,3 @@ dir_=RPA_Console_testEnv/common/config.ini
 dir_=RPA_Console_testEnv/utils/uploadfiles
 
 """
-"""
-1、串通、运行起来（只使用selenium）
-2、代码结构重构（selenium+unittest），以page的形式，方便维护和查看。
-3、添加日志和配置文件（log和ini）
-4、添加HTML格式的测试报告。(HTMLTestReport)
-5、继续细化case
-6、真正的麻烦点在于，case的组织，粒度由自己控制。
-"""

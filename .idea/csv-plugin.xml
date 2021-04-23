@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\RPA_Console_testEnv\readme.txt">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\RPA_Console_testEnv\rpa_console.py">
           <value>
             <Attribute>
