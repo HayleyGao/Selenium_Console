@@ -2,6 +2,8 @@ import time
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class notificationPage:
@@ -111,6 +113,7 @@ class notificationPage:
         confirm_btn.click()  # 这里点击了“确定按钮”
         time.sleep(3)
 
+
     def notification_menu(self):
         """
         通知设置
@@ -122,3 +125,20 @@ class notificationPage:
         self.notification_panel()
         self.notification_mail()
         self.notification_sumbitBtn()
+
+    def getToast(self):
+        pass
+
+    def getDivMessageBox(self):
+        """
+        div弹窗，类似toast的弹窗。
+        :return:
+        """
+        #元素位置
+        message_content_locator=(By.XPATH,'/html/body/div[2]/div/div/nz-message-container/div/nz-message/div/div/div/span')
+        #显式等待获取元素
+        WebDriverWait(self.driver,20,0.5).until(EC.presence_of_element_located(message_content_locator))
+        #获取toast
+        message_content_text=self.driver.find_element(By.XPATH,'/html/body/div[2]/div/div/nz-message-container/div/nz-message/div/div/div/span').get_attribute("innerText")
+        print(message_content_text)
+        return  message_content_text

@@ -2,6 +2,7 @@ import time
 import unittest
 
 from selenium.webdriver import Chrome
+from selenium.webdriver.support.ui import WebDriverWait
 
 from RPA_Console_testEnv.common.log import logger
 from RPA_Console_testEnv.common.readConfig import ReadConfig
@@ -35,15 +36,18 @@ class notificationTest(unittest.TestCase):
         url_ = ReadConfig().getOptionValue('environment', 'url') + '#/dashboard'
         self.assertEqual(self.driver.current_url, url_)
 
+
     def test_03(self):
         """
-        通知设置
+        通知设置,设置成功。
         :return:
         """
         notification = notificationPage(self.driver)
         time.sleep(3)
         notification.notification_menu()
-        self.assertNotEqual(1, 2)
+        message_content_text=notification.getDivMessageBox()
+        self.assertNotEqual("设置成功", message_content_text)
+
 
     @classmethod
     def tearDownClass(cls):
