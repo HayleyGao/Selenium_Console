@@ -156,7 +156,7 @@ class tasksPage:
         self.driver.execute_script(main_section_scroll)
         time.sleep(1)
 
-    def addTask_byTiming_dynamicAllocation(self):
+    def addTask_byTiming_dynamicAllocation(self,task_name_str):
         """
         新建任务，定时任务,动态分配
         前提条件：先判断机器人列表中至少有2个或以上个数的机器人。
@@ -174,7 +174,7 @@ class tasksPage:
 
         # 任务名称
         # task_name.send_keys('task_'+str(math.ceil(time.time()))+'_dynamicAllocation')
-        task_name_str = 'task_' + str(math.ceil(time.time())) + '_dynamicAllocation'
+        #task_name_str = 'task_' + str(math.ceil(time.time())) + '_dynamicAllocation'
         self.task_name_input().send_keys(task_name_str)
         time.sleep(1)
 
@@ -193,57 +193,57 @@ class tasksPage:
         # 防止屏幕的元素被遮挡，向下滚动一些。
         self.addTask_screenScrollTop()
 
-    def addTask_byTiming_dynamicAllocation_Every(self):
+    def addTask_byTiming_dynamicAllocation_Every(self,task_name_str):
         """
         定时，动态分配，每隔
         :param self.driver:
         :return:
         """
-        self.addTask_byTiming_dynamicAllocation()
+        self.addTask_byTiming_dynamicAllocation(task_name_str)
         self.addTask_byTiming_Every()
         self.addTask_notification_switchBtn()
         self.addTask_submit_confirmBtn()
 
-    def addTask_byTiming_dynamicAllocation_Daily(self):
+    def addTask_byTiming_dynamicAllocation_Daily(self,task_name_str):
         """
         定时，动态分配，每天
         :param self.driver:
         :return:
         """
-        self.addTask_byTiming_dynamicAllocation()
+        self.addTask_byTiming_dynamicAllocation(task_name_str)
         self.addTask_byTiming_Daily()
         self.addTask_notification_switchBtn()
         self.addTask_submit_confirmBtn()
 
-    def addTask_byTiming_dynamicAllocation_Weekly(self):
+    def addTask_byTiming_dynamicAllocation_Weekly(self,task_name_str):
         """
         定时，动态分配，每周
         :param self.driver:
         :return:
         """
-        self.addTask_byTiming_dynamicAllocation()
+        self.addTask_byTiming_dynamicAllocation(task_name_str)
         self.addTask_byTiming_Weekly(self.driver)
         self.addTask_notification_switchBtn(self.driver)
         self.addTask_submit_confirmBtn(self.driver)
 
-    def addTask_byTiming_dynamicAllocation_Monthly(self):
+    def addTask_byTiming_dynamicAllocation_Monthly(self,task_name_str):
         """
         定时，动态分配，每月
         :param self.driver:
         :return:
         """
-        self.addTask_byTiming_dynamicAllocation()
+        self.addTask_byTiming_dynamicAllocation(task_name_str)
         self.addTask_byTiming_Mouthly()
         self.addTask_notification_switchBtn()
         self.addTask_submit_confirmBtn()
 
-    def addTask_byTiming_dynamicAllocation_Once(self):
+    def addTask_byTiming_dynamicAllocation_Once(self,task_name_str):
         """
         定时，动态分配，执行一次
         :param self.driver:
         :return:
         """
-        self.addTask_byTiming_dynamicAllocation()
+        self.addTask_byTiming_dynamicAllocation(task_name_str)
         self.addTask_byTiming_Once()
         self.addTask_notification_switchBtn()
         self.addTask_submit_confirmBtn()
@@ -439,7 +439,7 @@ class tasksPage:
         select_robot.click()
         time.sleep(1)
 
-    def addTask_byTiming_selectRobot(self):
+    def addTask_byTiming_selectRobot(self,task_name_str):
         """
         新增任务，定时，选定机器人
         定时，选定机器人、动态分配
@@ -455,7 +455,7 @@ class tasksPage:
         time.sleep(2)
 
         # 任务名称
-        task_name_str = 'task_' + str(math.ceil(time.time())) + '_selectRobot'
+        #task_name_str = 'task_' + str(math.ceil(time.time())) + '_selectRobot'
         self.task_name_input().send_keys(task_name_str)
         time.sleep(1)
 
@@ -474,58 +474,58 @@ class tasksPage:
         # 防止屏幕的元素被遮挡，向下滚动一些。
         self.addTask_screenScrollTop()
 
-    def addTask_byTiming_selectRobot_Every(self):
+    def addTask_byTiming_selectRobot_Every(self,task_name_str):
         """
         定时，选定机器人，每隔
         :param self.driver:
         :return:
         """
         print("addTask_byTiming_selectRobot_Every")
-        self.addTask_byTiming_selectRobot()
+        self.addTask_byTiming_selectRobot(task_name_str)
         self.addTask_byTiming_Every()
         self.addTask_notification_switchBtn()
         self.addTask_submit_confirmBtn()
 
-    def addTask_byTiming_selectRobot_Daily(self):
+    def addTask_byTiming_selectRobot_Daily(self,task_name_str):
         """
         定时，选定机器人，每天
         :param self.driver:
         :return:
         """
-        self.addTask_byTiming_selectRobot()
+        self.addTask_byTiming_selectRobot(task_name_str)
         self.addTask_byTiming_Daily()
         self.addTask_notification_switchBtn()
         self.addTask_submit_confirmBtn()
 
-    def addTask_byTiming_selectRobot_Weekly(self):
+    def addTask_byTiming_selectRobot_Weekly(self,task_name_str):
         """
         定时，选定机器人，每天
         :param self.driver:
         :return:
         """
-        self.addTask_byTiming_selectRobot()
+        self.addTask_byTiming_selectRobot(task_name_str)
         self.addTask_byTiming_Weekly()
         self.addTask_notification_switchBtn()
         self.addTask_submit_confirmBtn()
 
-    def addTask_byTiming_selectRobot_Monthly(self):
+    def addTask_byTiming_selectRobot_Monthly(self,task_name_str):
         """
         定时，选定机器人，每天
         :param self.driver:
         :return:
         """
-        self.addTask_byTiming_selectRobot()
+        self.addTask_byTiming_selectRobot(task_name_str)
         self.addTask_byTiming_Mouthly()
         self.addTask_notification_switchBtn()
         self.addTask_submit_confirmBtn()
 
-    def addTask_byTiming_selectRobot_Once(self):
+    def addTask_byTiming_selectRobot_Once(self,task_name_str):
         """
         定时，选定机器人，每天
         :param self.driver:
         :return:
         """
-        self.addTask_byTiming_selectRobot()
+        self.addTask_byTiming_selectRobot(task_name_str)
         self.addTask_byTiming_Once()
         self.addTask_notification_switchBtn()
         self.addTask_submit_confirmBtn()

@@ -1,66 +1,85 @@
 import unittest
-
 from selenium.webdriver import Chrome
 
-from RPA_Console_testEnv.common.log import logger
 from RPA_Console_testEnv.pageObject.choiceTenant import choiceTenantPage
 from RPA_Console_testEnv.pageObject.loginPage import loginPage
 from RPA_Console_testEnv.pageObject.taskPage import tasksPage
 
+from RPA_Console_testEnv.common.readExcel import readExcel
+from RPA_Console_testEnv.common.readConfig import  ReadConfig
+from RPA_Console_testEnv.common.log import logger
+import math,time
 
-class tasksTest(unittest.TestCase):
+
+class task_timing_selectRobot_Test(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
         cls.driver = Chrome()
         cls.driver.maximize_window()
-        cls.driver.get("http://rpa-test.datagrand.com")
+        cls.url = ReadConfig().getOptionValue('environment', 'url')  # 变成类范围的变量。
+        cls.driver.get(cls.url)
         cls.driver.implicitly_wait(3)
-        logger().info('driver is setup.')
+        logger().debug('driver is setup.')
 
     def test_01(self):
-        account = "gaoxiaoyan@datagrand.com"
-        pwd_testEnv = 'Gaoxiaoyan9533'
-        lo = loginPage(self.driver)  # 这里构造函数设置了driver参数，其余的方法便无须重复继承。
-        lo.loginIn(account, pwd_testEnv)  # 这里，loginPage中的方法便无须重复继承。
-        self.driver.implicitly_wait(3)
+        account = ReadConfig().getOptionValue('test_account01', 'account')
+        password = ReadConfig().getOptionValue('test_account01', 'password')
+        lo = loginPage(self.driver)
+        lo.loginIn(account, password)
+        # http://rpa-test.datagrand.com/#/passport/login
+        url_ = ReadConfig().getOptionValue('environment', 'url') + '#/passport/login'
+        self.assertEqual(self.driver.current_url, url_)
 
     def test_02(self):
         choiceTenant = choiceTenantPage(self.driver)
         choiceTenant.choiceTenant()
-        self.assertEqual(self.driver.current_url, 'http://rpa-test.datagrand.com/#/dashboard')
+        url_ = ReadConfig().getOptionValue('environment', 'url') + '#/dashboard'
+        self.assertEqual(self.driver.current_url, url_)
+
 
     def test_03(self):
         task_page = tasksPage(self.driver)
-        task_page.addTask_byTiming_selectRobot_Every()
-        self.assertEqual(self.driver.current_url, 'http://rpa-test.datagrand.com/#/rpa/task-list')
+        task_name_str = 'task_' + str(math.ceil(time.time())) + '_dynamicAllocation'
+        task_page.addTask_byTiming_selectRobot_Every(task_name_str)
+        task_name_latest = task_page.getLatestTask()
+        self.assertEqual(task_name_str, task_name_latest, '新建任务失败。')
 
-    #
-    # def test_04(self):
-    #     task_page=tasksPage(self.driver)
-    #     task_page.addTask_byTiming_selectRobot_Daily()
-    #     self.assertEqual(self.driver.current_url,'http://rpa-test.datagrand.com/#/rpa/task-list/create-task?taskId=_NEW_')
-    #
-    # def test_05(self):
-    #     task_page=tasksPage(self.driver)
-    #     task_page.addTask_byTiming_selectRobot_Weekly()
-    #     self.assertEqual(self.driver.current_url,'http://rpa-test.datagrand.com/#/rpa/task-list/create-task?taskId=_NEW_')
-    #
-    # def test_06(self):
-    #     task_page=tasksPage(self.driver)
-    #     task_page.addTask_byTiming_selectRobot_Monthly()
-    #     self.assertEqual(self.driver.current_url,'http://rpa-test.datagrand.com/#/rpa/task-list/create-task?taskId=_NEW_')
-    #
-    # def test_07(self):
-    #     task_page=tasksPage(self.driver)
-    #     task_page.addTask_byTiming_selectRobot_Once()
-    #     self.assertEqual(self.driver.current_url,'http://rpa-test.datagrand.com/#/rpa/task-list/create-task?taskId=_NEW_')
+    def test_04(self):
+        task_page = tasksPage(self.driver)
+        task_name_str = 'task_' + str(math.ceil(time.time())) + '_dynamicAllocation'
+        task_page.addTask_byTiming_selectRobot_Daily(task_name_str)
+        task_name_latest = task_page.getLatestTask()
+        self.assertEqual(task_name_str, task_name_latest, '新建任务失败。')
+
+    def test_05(self):
+        task_page = tasksPage(self.driver)
+        task_name_str = 'task_' + str(math.ceil(time.time())) + '_dynamicAllocation'
+
+        task_page.addTask_byTiming_selectRobot_Weekly(task_name_str)
+        task_name_latest = task_page.getLatestTask()
+        self.assertEqual(task_name_str, task_name_latest, '新建任务失败。')
+
+    def test_06(self):
+        task_page = tasksPage(self.driver)
+        task_name_str = 'task_' + str(math.ceil(time.time())) + '_dynamicAllocation'
+
+        task_page.addTask_byTiming_selectRobot_Monthly(task_name_str)
+        task_name_latest = task_page.getLatestTask()
+        self.assertEqual(task_name_str, task_name_latest, '新建任务失败。')
+
+    def test_07(self):
+        task_page = tasksPage(self.driver)
+        task_name_str = 'task_' + str(math.ceil(time.time())) + '_dynamicAllocation'
+        task_page.addTask_byTiming_selectRobot_Once(task_name_str)
+        task_name_latest = task_page.getLatestTask()
+        self.assertEqual(task_name_str, task_name_latest, '新建任务失败。')
 
     @classmethod
     def tearDownClass(cls):
         cls.driver.quit()
-        logger().info('driver is quit.')
 
 
 if __name__ == "__main__":
     unittest.main()
+

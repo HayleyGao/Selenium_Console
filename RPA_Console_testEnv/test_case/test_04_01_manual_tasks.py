@@ -10,7 +10,7 @@ from selenium.webdriver import Chrome
 from RPA_Console_testEnv.pageObject.choiceTenant import choiceTenantPage
 from RPA_Console_testEnv.pageObject.loginPage import loginPage
 from RPA_Console_testEnv.pageObject.taskPage import tasksPage
-
+import math,time
 #task_name_str = readExcel()[1]
 
 
@@ -43,7 +43,8 @@ class task_manual_Test(unittest.TestCase):
 
     def test_03(self):
         task_page = tasksPage(self.driver)
-        task_name_str='task_manual_demo0421_0001'
+        #task_name_str='task_manual_demo0421_0001'
+        task_name_str = 'task_' + str(math.ceil(time.time())) + 'manual'
         task_page.addTask_byManual(task_name_str)
         task_name_latest = task_page.getLatestTask()
         self.assertEqual(task_name_str, task_name_latest, '新建任务失败。')

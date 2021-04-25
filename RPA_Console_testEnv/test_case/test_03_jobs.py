@@ -56,7 +56,7 @@ class jobsTest(unittest.TestCase):
         status_tag = jobs_page.job_first_record_status_tag()
         self.assertEqual('已终止', status_tag)
 
-    def test_10(self):
+    def test_6(self):
         """
         判断"今天范围"作业是否导出成功
         :return:
@@ -69,7 +69,7 @@ class jobsTest(unittest.TestCase):
         isExpert_after = jobs_page.isExpert(console_download_path)
         self.assertEqual(isExpert_after, isExpert_before + 1)
 
-    def test_11(self):
+    def test_7(self):
         """
         判断"全部-自定义范围"作业是否导出成功
         :return:
@@ -82,7 +82,7 @@ class jobsTest(unittest.TestCase):
         isExpert_after = jobs_page.isExpert(console_download_path)
         self.assertEqual(isExpert_after, isExpert_before + 1)
 
-    def test_12(self):
+    def test_8(self):
         """
         判断作业详情
         :return:
@@ -91,7 +91,7 @@ class jobsTest(unittest.TestCase):
         job_details = jobs_page.job_first_record_details()
         self.assertEqual('作业详情', job_details)
 
-    def test_13(self):
+    def test_09(self):
         """
         判断，更多，查看日志
         :return:
@@ -100,7 +100,7 @@ class jobsTest(unittest.TestCase):
         jobs_page.more_job_log()
         self.assertEqual(1, 1)
 
-    def test_13(self):
+    def test_10(self):
         """
         搜索框
         :return:
