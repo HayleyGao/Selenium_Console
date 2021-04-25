@@ -1,7 +1,12 @@
 import configparser
+import os
 
-config_path = r'C:\Users\caiwenjie\PycharmProjects\selenium_demo\RPA_Console_testEnv\common\config.ini'
 
+config_name='config.ini'
+dir_=os.path.dirname(os.path.abspath(__file__))
+config_path=os.path.join(dir_,config_name)
+# print('config_path',config_path)
+#config_path = r'C:\Users\caiwenjie\PycharmProjects\selenium_demo\RPA_Console_testEnv\common\config.ini'
 
 class ReadConfig:
     def __init__(self):

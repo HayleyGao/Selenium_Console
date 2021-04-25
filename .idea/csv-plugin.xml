@@ -80,6 +80,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\RPA_Console_testEnv\test_case\test_01_login.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\RPA_Console_testEnv\test_case\test_calendar.py">
           <value>
             <Attribute>
