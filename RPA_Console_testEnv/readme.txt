@@ -10,4 +10,7 @@ dir_=RPA_Console_testEnv/common/config.ini
 上传所需要的模板或材料的路径，可自取下载和配置：
 dir_=RPA_Console_testEnv/utils/uploadfiles
 
+chromedriver 下载地址，可参考：
+http://chromedriver.storage.googleapis.com/index.html
+
 """

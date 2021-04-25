@@ -31,6 +31,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\RPA_Console_testEnv\common\readExcel.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\RPA_Console_testEnv\login_datagrand.py">
           <value>
             <Attribute>
