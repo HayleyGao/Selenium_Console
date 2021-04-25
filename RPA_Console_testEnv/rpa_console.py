@@ -937,6 +937,7 @@ def back2TopLogMenu(driver):
     data_monitor_scree.click()
     time.sleep(3)
     # driver.implicitly_wait()
+    data_monitor_scree.is_selected()
 
 
 def run(url, account, pwd):
@@ -962,6 +963,7 @@ def run(url, account, pwd):
     account_profile(driver)
 
     print("UI travel success!")
+
 
 
 if __name__ == '__main__':

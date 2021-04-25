@@ -44,10 +44,28 @@ class notificationTest(unittest.TestCase):
         """
         notification = notificationPage(self.driver)
         time.sleep(3)
-        notification.notification_menu()
+        server_address="smtp.mxhichina.com"
+        server_port="465"
+        sender_account="notice@datagrand.com"
+        sender_pwd="DAguan123."
+        notification.notification_menu(server_address,server_port,sender_account,sender_pwd)
         message_content_text=notification.getDivMessageBox()
-        self.assertNotEqual("设置成功", message_content_text)
+        self.assertEqual("设置成功", message_content_text)
 
+    def wtest_04(self):
+        """
+        通知设置,邮箱信息，异常。
+        :return:
+        """
+        notification = notificationPage(self.driver)
+        time.sleep(3)
+        server_address=""
+        server_port="465"
+        sender_account="notice@datagrand.com"
+        sender_pwd="DAguan123."
+        notification.notification_menu(server_address,server_port,sender_account,sender_pwd)
+        message_content_text=notification.getDivMessageBox()
+        self.assertEqual("请将信息填写完整", message_content_text)
 
     @classmethod
     def tearDownClass(cls):

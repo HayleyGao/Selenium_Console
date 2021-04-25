@@ -19,6 +19,8 @@ class notificationPage:
         点击进入通知设置模块
         :return:
         """
+        self.driver.refresh() #刷新页面
+        time.sleep(2)
         notification_menu_btn = self.driver.find_element(By.XPATH,
                                                          "/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-menu/ul/li[9]/div["
                                                          "2]/ul/li[7]")
@@ -64,7 +66,7 @@ class notificationPage:
         seconds.send_keys("30")
         time.sleep(1)
 
-    def notification_mail(self):
+    def notification_mail(self,server_address,server_port,sender_account,sender_pwd):
         """
         填写邮箱信息区域
         :return:
@@ -74,7 +76,9 @@ class notificationPage:
         email_address = self.driver.find_element(By.XPATH,
                                                  '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-settings-notification/section/nz-card/div[2]/form/nz-form-item[3]/nz-form-control/div/div/div/div/input')
         email_address.clear()
-        email_address.send_keys("smtp.mxhichina.com")
+        #email_address.send_keys("smtp.mxhichina.com")
+        email_address.send_keys(server_address)
+
         time.sleep(1)
         email_port = self.driver.find_element(By.XPATH,
                                               '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-settings-notification/section/nz-card/div[2]/form/nz-form-item[4]/nz-form-control/div/div/div/div/nz-input-number/div[2]/input')
@@ -84,18 +88,21 @@ class notificationPage:
             pass
         else:
             email_port.clear()
-            email_port.send_keys("465")  # 端口这里的输入框是属于复合输入框。
+            #email_port.send_keys("465")  # 端口这里的输入框是属于复合输入框。
+            email_port.send_keys(server_port)
 
         time.sleep(1)
         email_sender = self.driver.find_element(By.XPATH,
                                                 '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-settings-notification/section/nz-card/div[2]/form/nz-form-item[5]/nz-form-control/div/div/div/div/input')
         email_sender.clear()
-        email_sender.send_keys("notice@datagrand.com")
+        # email_sender.send_keys("notice@datagrand.com")
+        email_sender.send_keys(sender_account)
         time.sleep(1)
         email_sender_pwd = self.driver.find_element(By.XPATH,
                                                     "/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-settings-notification/section/nz-card/div[2]/form/nz-form-item[6]/nz-form-control/div/div/div/div/nz-input-group/input")
         email_sender_pwd.clear()
-        email_sender_pwd.send_keys("DAguan123.")
+        # email_sender_pwd.send_keys("DAguan123.")
+        email_sender_pwd.send_keys(sender_pwd)
         time.sleep(1)
 
     def notification_sumbitBtn(self):
@@ -107,27 +114,19 @@ class notificationPage:
                                                           "/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-settings-notification/section/nz-card/div[2]/div/button")
         notification_sumbitBtn.send_keys(Keys.ENTER)
         time.sleep(3)
+
+
+    def notification_confirmDialog_confirmBtn(self):
+        """
+        确认对话框的确认按钮
+        :return:
+        """
         # 可能会弹出确认对话框
         confirm_btn = self.driver.find_element(By.XPATH,
                                                '/html/body/div[2]/div[2]/div/nz-modal-confirm-container/div/div/div/div/div[2]/button[2]')
         confirm_btn.click()  # 这里点击了“确定按钮”
         time.sleep(3)
 
-
-    def notification_menu(self):
-        """
-        通知设置
-        :return:
-        """
-        self.notification_menu_btn().click()
-        time.sleep(3)
-        # 进入通知设置界面
-        self.notification_panel()
-        self.notification_mail()
-        self.notification_sumbitBtn()
-
-    def getToast(self):
-        pass
 
     def getDivMessageBox(self):
         """
@@ -140,5 +139,22 @@ class notificationPage:
         WebDriverWait(self.driver,20,0.5).until(EC.presence_of_element_located(message_content_locator))
         #获取toast
         message_content_text=self.driver.find_element(By.XPATH,'/html/body/div[2]/div/div/nz-message-container/div/nz-message/div/div/div/span').get_attribute("innerText")
-        print(message_content_text)
+        #print(message_content_text)
         return  message_content_text
+
+
+    def notification_menu(self,server_address,server_port,sender_account,sender_pwd):
+        """
+        通知设置
+        :return:
+        """
+        self.notification_menu_btn().click()
+        time.sleep(3)
+        # 进入通知设置界面
+        self.notification_panel()
+        self.notification_mail(server_address,server_port,sender_account,sender_pwd)
+        self.notification_sumbitBtn()
+        self.notification_confirmDialog_confirmBtn()
+
+
+
