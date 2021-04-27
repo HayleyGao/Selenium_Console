@@ -1,3 +1,4 @@
+import time
 import unittest
 
 from selenium.webdriver import Chrome
@@ -6,18 +7,17 @@ from RPA_Console_testEnv.common.log import logger
 from RPA_Console_testEnv.common.readConfig import ReadConfig
 from RPA_Console_testEnv.pageObject.choiceTenant import choiceTenantPage
 from RPA_Console_testEnv.pageObject.loginPage import loginPage
-from RPA_Console_testEnv.pageObject.usersPage import usersPage
+from RPA_Console_testEnv.pageObject.rolesPage import rolesPage
 from selenium import  webdriver
 
 
-class usersTest(unittest.TestCase):
+class rolesTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
         options = webdriver.ChromeOptions()
         options.add_argument("--ignore-certificate-errors")
         cls.driver = webdriver.Chrome(options=options)
-
         cls.driver.maximize_window()
         cls.url = ReadConfig().getOptionValue('environment', 'url')  # 变成类范围的变量。
         cls.driver.get(cls.url)
@@ -40,42 +40,13 @@ class usersTest(unittest.TestCase):
 
     def test_03(self):
         """
-        角色管理，进入用户管理模块。
+        角色管理
         :return:
         """
-        users_Page = usersPage(self.driver)
-        users_Page.user_list()
-        url_ = ReadConfig().getOptionValue('environment', 'url') + '#/settings/user-list'
-        self.assertEqual(self.driver.current_url, url_)
-
-
-    def test_04(self):
-        """
-        角色管理，添加用户。
-        :return:
-        """
-        users_Page = usersPage(self.driver)
-        users_Page.add_user()
+        roles_Page = rolesPage(self.driver)
+        time.sleep(3)
+        roles_Page.role_menu()
         self.assertNotEqual(1, 2)
-
-    def test_05(self):
-        """
-        角色管理，批量导入
-        :return:
-        """
-        users_Page = usersPage(self.driver)
-        users_Page.user_batchImport()
-        self.assertNotEqual(1, 2)
-
-    def test_06(self):
-        """
-        角色管理,搜索
-        :return:
-        """
-        users_Page = usersPage(self.driver)
-        users_Page.search()
-        self.assertNotEqual(1, 2)
-
 
     @classmethod
     def tearDownClass(cls):

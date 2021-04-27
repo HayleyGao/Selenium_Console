@@ -1,5 +1,5 @@
 import unittest
-from selenium import webdriver
+
 from selenium.webdriver import Chrome
 
 from RPA_Console_testEnv.common.log import logger
@@ -12,12 +12,7 @@ class login_tentant_Test(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        #添加options的目的是为了解决https多出来的页面问题。
-        options = webdriver.ChromeOptions()
-        options.add_argument("--ignore-certificate-errors")
-        cls.driver = webdriver.Chrome(options=options)
-
-        #cls.driver = Chrome()
+        cls.driver = Chrome()
         cls.driver.maximize_window()
         cls.url = ReadConfig().getOptionValue('environment', 'url')  # 变成类范围的变量。
         cls.driver.get(cls.url)
@@ -39,10 +34,10 @@ class login_tentant_Test(unittest.TestCase):
         url_ = ReadConfig().getOptionValue('environment', 'url') + '#/dashboard'
         self.assertEqual(self.driver.current_url, url_)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.quit()
-        logger().debug('driver is setup.')
+    # @classmethod
+    # def tearDownClass(cls):
+    #     cls.driver.quit()
+    #     logger().debug('driver is setup.')
 
 
 if __name__ == "__main__":

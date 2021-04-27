@@ -8,16 +8,13 @@ from RPA_Console_testEnv.common.readConfig import ReadConfig
 from RPA_Console_testEnv.pageObject.choiceTenant import choiceTenantPage
 from RPA_Console_testEnv.pageObject.jobPage import jobsPage
 from RPA_Console_testEnv.pageObject.loginPage import loginPage
-from selenium import  webdriver
 
-class jobsTest(unittest.TestCase):
+
+class accountProfileTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        options = webdriver.ChromeOptions()
-        options.add_argument("--ignore-certificate-errors")
-        cls.driver = webdriver.Chrome(options=options)
-
+        cls.driver = Chrome()
         cls.driver.maximize_window()
         cls.url = ReadConfig().getOptionValue('environment', 'url')  # 变成类范围的变量。
         cls.driver.get(cls.url)

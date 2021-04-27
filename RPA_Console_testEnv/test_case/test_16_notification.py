@@ -1,6 +1,6 @@
 import time
 import unittest
-
+from selenium import webdriver
 from selenium.webdriver import Chrome
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -15,7 +15,11 @@ class notificationTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.driver = Chrome()
+        #添加options的目的是为了解决https多出来的页面问题。
+        options = webdriver.ChromeOptions()
+        options.add_argument("--ignore-certificate-errors")
+        cls.driver = webdriver.Chrome(options=options)
+
         cls.driver.maximize_window()
         cls.url = ReadConfig().getOptionValue('environment', 'url')  # 变成类范围的变量。
         cls.driver.get(cls.url)

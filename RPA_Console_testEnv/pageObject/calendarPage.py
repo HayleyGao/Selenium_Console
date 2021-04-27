@@ -1,9 +1,12 @@
+import math
+import os
 import time
 
 import win32con
 import win32gui
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 class calendarPage:
     def __init__(self, driver):
@@ -14,8 +17,10 @@ class calendarPage:
         进入“日历管理”列表
         :return:
         """
+        time.sleep(2)
         calendar_menu_btn = self.driver.find_element(By.XPATH,
-                                                     "/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-menu/ul/li[9]/div[2]/ul/li[6]/span")
+                                                     "/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-menu/ul/li[9]/div[2]/ul/li[6]")
+                                                    #"/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-menu/ul/li[9]/div[2]/ul/li[6]"
         calendar_menu_btn.click()
         time.sleep(3)
 
@@ -185,14 +190,25 @@ class calendarPage:
     def isCalendarListEmpty(self):
         """
         判断日历列表是否为空
+        需要除去第一行标题行。
         :return:
         """
+        #len==1的时候分为2中情况：1、空态图显示占据了一个tr 2、正常的数据显示占据了一行。
         calendar_list = self.driver.find_elements(By.XPATH,
                                                   '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/settings-calendar-list/section/div/nz-table/nz-spin/div/div/nz-table-inner-default/div/table/tbody/tr')
-        if len(calendar_list) == 0:
-            return True
+        print('calendar_list length:', len(calendar_list))
+
+
+        if len(calendar_list) == 1:
+            try:
+                #空态图
+                empty_graph_locator=(By.XPATH,'/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/settings-calendar-list/section/div/nz-table/nz-spin/div/div/nz-table-inner-default/div/table/tbody/tr/td/nz-embed-empty/nz-empty/p')
+                empty_graph=WebDriverWait(self.driver,5).until(EC.presence_of_element_located(empty_graph_locator))
+                #empty_graph_text=empty_graph.get_attribute("innerText")
+                return True
+            except:
+                return False
         else:
-            print('calendar_list length:', len(calendar_list))
             return False
 
     def calendar_delete(self):
@@ -217,8 +233,12 @@ class calendarPage:
         (新增、删除，都可以使用这个方法进行断言。)
         :return:
         """
-        carlendar_first_record = self.driver.find_element(By.XPATH,
-                                                          "/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/settings-calendar-list/section/div/nz-table/nz-spin/div/div/nz-table-inner-default/div/table/tbody/tr[1]/td[1]/shared-ellipsis/div")
-        carlendar_first_record_name = carlendar_first_record.get_attribute("innerText")
-        print('carlendar_first_record_name', carlendar_first_record_name)
-        return carlendar_first_record_name
+        if self.isCalendarListEmpty()==True:
+            return None
+        else:
+            carlendar_first_record = self.driver.find_element(By.XPATH,
+                                                              "/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/settings-calendar-list/section/div/nz-table/nz-spin/div/div/nz-table-inner-default/div/table/tbody/tr/td[1]/shared-ellipsis/div")
+
+            carlendar_first_record_name = carlendar_first_record.get_attribute("innerText")
+            print('carlendar_first_record_name', carlendar_first_record_name)
+            return carlendar_first_record_name

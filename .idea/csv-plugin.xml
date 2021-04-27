@@ -87,10 +87,38 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\RPA_Console_testEnv\test_case\test_02_enterTenat.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\RPA_Console_testEnv\test_case\test_05_robots.py">
           <value>
             <Attribute>
               <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\RPA_Console_testEnv\test_case\test_13_users.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\RPA_Console_testEnv\test_case\test_14_roles.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\RPA_Console_testEnv\test_case\test_15_calendar.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
             </Attribute>
           </value>
         </entry>

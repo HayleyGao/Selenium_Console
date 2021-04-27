@@ -22,3 +22,4 @@ if __name__ == "__main__":
     with open(report_name, 'wb') as fp:
         runner = HTMLTestRunner(fp, verbosity=2, title='RPA_Console_Test')
         runner.run(suite)
+

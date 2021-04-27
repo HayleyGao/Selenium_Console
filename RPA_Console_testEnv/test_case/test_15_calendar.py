@@ -8,13 +8,18 @@ from RPA_Console_testEnv.common.readConfig import ReadConfig
 from RPA_Console_testEnv.pageObject.calendarPage import calendarPage
 from RPA_Console_testEnv.pageObject.choiceTenant import choiceTenantPage
 from RPA_Console_testEnv.pageObject.loginPage import loginPage
+from selenium import webdriver
 
 
 class calendarTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.driver = Chrome()
+        #添加options的目的是为了解决https多出来的页面问题。
+        options = webdriver.ChromeOptions()
+        options.add_argument("--ignore-certificate-errors")
+        cls.driver = webdriver.Chrome(options=options)
+
         cls.driver.maximize_window()
         cls.url = ReadConfig().getOptionValue('environment', 'url')  # 变成类范围的变量。
         cls.driver.get(cls.url)
@@ -27,6 +32,7 @@ class calendarTest(unittest.TestCase):
         lo = loginPage(self.driver)
         lo.loginIn(account, password)
         url_ = ReadConfig().getOptionValue('environment', 'url') + '#/passport/login'
+        self.assertEqual(self.driver.current_url, url_)
         self.assertEqual(self.driver.current_url, url_)
 
     def test_02(self):
@@ -63,7 +69,7 @@ class calendarTest(unittest.TestCase):
         templateDownload_after = calendar.isDownload(console_download_path)
         self.assertEqual(templateDownload_after, templateDownload_brfore + 1)
 
-    def test_05(self):
+    def wtest_05(self):
         """
         判断是否删除成功。
         :return:
