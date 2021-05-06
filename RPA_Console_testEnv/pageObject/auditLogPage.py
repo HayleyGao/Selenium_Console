@@ -25,7 +25,7 @@ class auditLogPage:
         select_menu.click()
         time.sleep(1)
         option_item3 = self.driver.find_element(By.XPATH,
-                                                '/html/body/div[2]/div[3]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[3]/div')
+                                                '/html/body/div[2]/div[2]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[3]/div')
         option_item3.click()
         time.sleep(1)
         # 点击导出按钮
@@ -62,7 +62,7 @@ class auditLogPage:
 
         # 点击日历组件的确定按钮
         calendar_confirm_btn = self.driver.find_element(By.XPATH,
-                                                        '/html/body/div[2]/div[3]/div/div/div/date-range-popup/div/div[2]/calendar-footer/div/ul/li/button')
+                                                        '/html/body/div[2]/div[2]/div/div/div/date-range-popup/div/div[2]/calendar-footer/div/ul/li/button')
         calendar_confirm_btn.click()
         time.sleep(1)
 

@@ -17,6 +17,7 @@ class loginTest(unittest.TestCase):
 
         cls.driver.maximize_window()
         cls.url = ReadConfig().getOptionValue('environment', 'url')  # 定义了url为当前类范围。
+        print(cls.url)
         cls.driver.get(cls.url)
         cls.driver.implicitly_wait(3)
         logger().debug('driver is setup.')

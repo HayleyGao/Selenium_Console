@@ -58,14 +58,14 @@ class organizationPage:
                 right_menu_addMember.click()
                 time.sleep(4)
                 first_account = self.driver.find_element(By.XPATH,
-                                                         '/html/body/div[2]/div[3]/div/nz-modal-container/div/div/div[2]/form/nz-table/nz-spin/div/div/nz-table-inner-default/div/table/tbody/tr[1]/td[1]/label/span[1]/input')
+                                                         '/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[2]/form/nz-table/nz-spin/div/div/nz-table-inner-default/div/table/tbody/tr[1]/td[1]/label/span[1]/input')
                 if first_account.is_selected() == True:
                     continue
                 else:
                     first_account.click()
                     time.sleep(1)
                 add_member_confirmBtn = self.driver.find_element(By.XPATH,
-                                                                 '/html/body/div[2]/div[3]/div/nz-modal-container/div/div/div[3]/button[2]')
+                                                                 '/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[3]/button[2]')
                 add_member_confirmBtn.click()
                 time.sleep(5)
 
@@ -76,11 +76,11 @@ class organizationPage:
                 right_menu_deleteDP.click()
                 time.sleep(3)
                 # 会弹出确认提示对话框
-                # org_deleteConfirmBtn=self.driver.find_element(By.XPATH,'/html/body/div[2]/div[3]/div/nz-modal-confirm-container/div/div/div/div/div[2]/button[2]')
+                # org_deleteConfirmBtn=self.driver.find_element(By.XPATH,'/html/body/div[2]/div[2]/div/nz-modal-confirm-container/div/div/div/div/div[2]/button[2]')
                 # org_deleteConfirmBtn.click()
                 # time.sleep(5)
                 org_deleteCancelBtn = self.driver.find_element(By.XPATH,
-                                                               '/html/body/div[2]/div[3]/div/nz-modal-confirm-container/div/div/div/div/div[2]/button[1]')
+                                                               '/html/body/div[2]/div[2]/div/nz-modal-confirm-container/div/div/div/div/div[2]/button[1]')
                 org_deleteCancelBtn.click()
                 time.sleep(5)
                 # 先移除右侧的被添加成功的成员，然后再双击删除其子部门
@@ -90,7 +90,7 @@ class organizationPage:
                 time.sleep(2)
                 # 点击确定提示按钮
                 delete_member_confirmBtn = self.driver.find_element(By.XPATH,
-                                                                    '/html/body/div[2]/div[3]/div/nz-modal-confirm-container/div/div/div/div/div[2]/button[2]')
+                                                                    '/html/body/div[2]/div[2]/div/nz-modal-confirm-container/div/div/div/div/div[2]/button[2]')
                 delete_member_confirmBtn.click()
                 time.sleep(3)
                 break  # 达成目的之后，不再继续遍历。
@@ -104,19 +104,19 @@ class organizationPage:
         # 组织名称
         # department_name_str='DP_'+str(random.randrange(1,65535))
         department_name = self.driver.find_element(By.XPATH,
-                                                   '/html/body/div[2]/div[3]/div/nz-modal-container/div/div/div[2]/form/section/nz-form-item/nz-form-control/div/div/input')
+                                                   '/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[2]/form/section/nz-form-item/nz-form-control/div/div/input')
         department_name.send_keys(department_name_str)
         time.sleep(1)
         # 配置组织权限
         any_role_authority = self.driver.find_element(By.XPATH,
-                                                      '/html/body/div[2]/div[3]/div/nz-modal-container/div/div/div[2]/div/div/span[1]/label/span[1]/input')
+                                                      '/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[2]/div/div/span[1]/label/span[1]/input')
         if any_role_authority.is_selected() == True:
             pass
         else:
             any_role_authority.click()
             time.sleep(1)
         organization_submit_btn = self.driver.find_element(By.XPATH,
-                                                           '/html/body/div[2]/div[3]/div/nz-modal-container/div/div/div[3]/button[2]')
+                                                           '/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[3]/button[2]')
         organization_submit_btn.click()
         time.sleep(5)
 
@@ -126,19 +126,19 @@ class organizationPage:
         # 组织名称
         # department_name_str='DP_'+str(random.randrange(1,65535))
         department_name = self.driver.find_element(By.XPATH,
-                                                   '/html/body/div[2]/div[3]/div/nz-modal-container/div/div/div[2]/form/section/nz-form-item/nz-form-control/div/div/input')
+                                                   '/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[2]/form/section/nz-form-item/nz-form-control/div/div/input')
         department_name.clear()
         department_name.send_keys(department_name_str)
         time.sleep(1)
         # 配置组织权限
         any_role_authority = self.driver.find_element(By.XPATH,
-                                                      '/html/body/div[2]/div[3]/div/nz-modal-container/div/div/div[2]/div/div/span[1]/label/span[1]/input')
+                                                      '/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[2]/div/div/span[1]/label/span[1]/input')
         if any_role_authority.is_selected() == True:
             pass
         else:
             any_role_authority.click()
             time.sleep(1)
         organization_submit_btn = self.driver.find_element(By.XPATH,
-                                                           '/html/body/div[2]/div[3]/div/nz-modal-container/div/div/div[3]/button[2]')
+                                                           '/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[3]/button[2]')
         organization_submit_btn.click()
         time.sleep(5)
