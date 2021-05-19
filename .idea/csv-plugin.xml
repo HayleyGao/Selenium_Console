@@ -66,6 +66,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\RPA_Console_testEnv\report\20210513-155851_report.html">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\RPA_Console_testEnv\rpa_console.py">
           <value>
             <Attribute>
@@ -98,6 +105,13 @@
           <value>
             <Attribute>
               <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\RPA_Console_testEnv\test_case\test_03_jobs.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
             </Attribute>
           </value>
         </entry>

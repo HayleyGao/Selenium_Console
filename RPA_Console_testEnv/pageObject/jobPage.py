@@ -4,6 +4,8 @@ import time
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class jobsPage:
@@ -29,7 +31,7 @@ class jobsPage:
         :return:
         """
         self.job_list_btn().click()
-        time.sleep(5)
+        time.sleep(3)
 
     def jobs_expert_btn(self):
         # 点击“导出按钮”
@@ -70,6 +72,8 @@ class jobsPage:
         return date
 
     def jobs_list_expert_byAll(self):
+        self.driver.refresh()
+        time.sleep(2)
         # 进入作业列表
         self.job_list_btn().click()
         time.sleep(3)
@@ -79,8 +83,8 @@ class jobsPage:
                                               '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-job-job-list/section/div[1]/rpa-time-range/div/nz-select')
         job_select.click()
         time.sleep(3)
-        item_all = self.driver.find_element(By.XPATH,
-                                            '/html/body/div[2]/div[3]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[1]')
+        item_all = self.driver.find_element(By.XPATH,#"/html/body/div[2]/div[2]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[1]/div"
+                                            '/html/body/div[2]/div[2]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[1]/div')
         item_all.click()
         time.sleep(1)
         # 点击，日历的起始和终止范围<这里需要js辅助>
@@ -103,7 +107,7 @@ class jobsPage:
         time.sleep(3)
         # 点击“确定”按钮
         calendar_end_confirmBtn = self.driver.find_element(By.XPATH,
-                                                           '/html/body/div[2]/div[3]/div/div/div/date-range-popup/div/div[2]/calendar-footer/div/ul/li/button')
+                                                           '/html/body/div[2]/div[2]/div/div/div/date-range-popup/div/div[2]/calendar-footer/div/ul/li/button')
         calendar_end_confirmBtn.click()
         time.sleep(1)
         self.jobs_expert_btn().click()
@@ -133,7 +137,7 @@ class jobsPage:
 
     def status_resetBtn(self):
         # 状态列表，“重置”按钮
-        status_resetBtn = self.driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div/div/div/button[1]')
+        status_resetBtn = self.driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div/div/div/div/button[1]')
         status_resetBtn.click()
         time.sleep(2)
 
@@ -296,7 +300,7 @@ class jobsPage:
                                                             '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-job-job-list/section/div[2]/nz-table/nz-spin/div/div/nz-table-inner-scroll/div/div/table/tbody/tr[2]/td[11]/shared-actions/shared-action-item/span[2]/a')
         return job_first_record_details
 
-    def job_first_record_details(self):
+    def job_first_record_details_href(self):
         """
         作业列表中，第一条记录的"作业详情"
         :return:返回作业详情超链接的文本
@@ -307,6 +311,70 @@ class jobsPage:
             print('job_first_record_details_text', job_first_record_details_text)
         return job_first_record_details_text
 
+
+    def job_first_record_details_dialog(self):
+        """
+        作业列表中，第一条记录的"作业详情"
+        :return:返回作业详情超链接的文本
+        """
+
+        if not self.isJobListEmpty():
+            self.job_details().click()
+            #等待作业详情的弹窗出现
+            time.sleep(4)
+            dialog_locator='/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[2]/nz-descriptions/div/table/tbody/tr[1]/td/span[2]'
+            job_name=WebDriverWait(self.driver,5).until(EC.presence_of_element_located((By.XPATH,dialog_locator)))
+
+            #获取第二列的内容的作业名称                         #“/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[2]/nz-descriptions/div/table/tbody/tr[1]/td/span[2]/text()”
+            job_name_text=job_name.get_attribute("innerText")
+            #
+            print('job_name_text',job_name_text)
+            return job_name_text
+        else:
+            return None
+
+
+    def job_first_record_details_dialog2(self):
+        """
+        作业列表中，第一条记录的"作业详情"
+        :return:返回作业详情超链接的文本
+        """
+
+        if not self.isJobListEmpty():
+            self.job_details().click()
+            #等待作业详情的弹窗出现
+            time.sleep(4)
+            #获取第二列的内容的作业名称                         #“/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[2]/nz-descriptions/div/table/tbody/tr[1]/td/span[2]/text()”
+            job_name_text=self.driver.find_element(By.XPATH,'/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[2]/nz-descriptions/div/table/tbody/tr[1]/td/span[2]').get_attribute("innerText")
+            #
+            print('job_name_text',job_name_text)
+            return job_name_text
+        else:
+            return None
+
+
+
+    def job_first_record_jobName(self):
+        """
+        作业列表中，第一条记录的"作业名称"
+        :return:
+        """
+
+        if not self.isJobListEmpty():
+            self.job_details().click()
+            #等待作业详情的弹窗出现
+            self.driver.implicitly_wait(5)
+            #获取第二列的内容的作业名称
+            job_first_record_jobName=self.driver.find_element(By.XPATH,'/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-job-job-list/section/div[2]/nz-table/nz-spin/div/div/nz-table-inner-scroll/div/div/table/tbody/tr[2]/td[1]/shared-ellipsis/div')
+            job_first_record_jobName_text=job_first_record_jobName.get_attribute("innerText")
+            print('job_first_record_jobName_text',job_first_record_jobName_text)
+            return job_first_record_jobName_text
+        else:
+            return None
+
+
+
+
     def more(self):
         """
         “更多”
@@ -316,16 +384,43 @@ class jobsPage:
                                              '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-job-job-list/section/div[2]/nz-table/nz-spin/div/div/nz-table-inner-scroll/div/div/table/tbody/tr[2]/td[11]/shared-actions/shared-action-overlay/a')
         return jobs_more
 
+    def more_options(self):
+        self.more().click()
+        self.driver.implicitly_wait(1)
+        options=self.driver.find_elements(By.XPATH,'/html/body/div[2]/div[2]/div/div/ul/li')
+        print('len(options)',len(options))
+        return len(options)
+
+
     def more_job_log(self):
         ActionChains(self.driver).click(self.more()).move_to_element(self.more()).perform()
         time.sleep(1)
-        job_log = self.driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div/ul/li[1]')
+        job_log = self.driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div/div/ul/li[1]')
         job_log.click()
-        time.sleep(2)
+        self.driver.implicitly_wait(5)
+        log_content=self.driver.find_element(By.XPATH,'/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[2]/div/main/span').get_attribute("innerText")
+        print('log_content',log_content)
+        return log_content
+
+
+    def job_logDialog_closeBtn(self):
         job_logDialog_closeBtn = self.driver.find_element(By.XPATH,
-                                                          "/html/body/div[2]/div[3]/div/nz-modal-container/div/div/button")
+                                                          "/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[3]/button")
         job_logDialog_closeBtn.click()
         time.sleep(2)
+
+    def more_job_log_successStatus(self):
+        ActionChains(self.driver).click(self.more()).move_to_element(self.more()).perform()
+        time.sleep(1)
+        job_log = self.driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div/div/ul/li[1]')
+        job_log.click()
+        self.driver.implicitly_wait(5)
+        log_content=self.driver.find_element(By.XPATH,'/html/body/div[2]/div[2]/div/nz-modal-container/div/div/div[2]/div/main/span').get_attribute("innerText")
+        print('log_content',log_content)
+        return log_content
+
+
+
 
     def more_execute(self):
         """

@@ -9,6 +9,8 @@ from RPA_Console_testEnv.pageObject.choiceTenant import choiceTenantPage
 from RPA_Console_testEnv.pageObject.loginPage import loginPage
 from selenium import  webdriver
 
+
+
 class auditTest(unittest.TestCase):
 
     @classmethod
@@ -21,6 +23,7 @@ class auditTest(unittest.TestCase):
         cls.url = ReadConfig().getOptionValue('environment', 'url')  # 变成类范围的变量。
         cls.driver.get(cls.url)
         cls.driver.implicitly_wait(3)
+        cls.download_path=ReadConfig().getOptionValue('console_download_path', 'console_download_path')
         logger().debug('driver is setup.')
 
     def test_01(self):
@@ -39,12 +42,47 @@ class auditTest(unittest.TestCase):
 
     def test_03(self):
         """
-        租户管理
+        审计管理列表
         :return:
         """
         auditLog_Page = auditLogPage(self.driver)
-        auditLog_Page.auditLog_menu()
+        auditLog_Page.auditLog_list()
+        url_=self.url+'#/audit/audit-list'
+        self.assertIn(url_, self.driver.current_url) #是否包含，有时候会出现分页详细情况。
+
+    def test_04(self):
+        """
+        审计管理-导出-今日
+        :return:
+        """
+        auditLog_Page = auditLogPage(self.driver)
+        expert_before = auditLog_Page.isExpert(self.download_path)
+        auditLog_Page.auditLog_expert_Today()
+        expert_after = auditLog_Page.isExpert(self.download_path)
+        self.assertEqual(expert_after, expert_before+1)
+
+    def test_05(self):
+        """
+        审计管理-导出-全部
+        :return:
+        """
+        auditLog_Page = auditLogPage(self.driver)
+        expert_before = auditLog_Page.isExpert(self.download_path)
+        auditLog_Page.auditLog_expert_All()
+        expert_after = auditLog_Page.isExpert(self.download_path)
+        self.assertEqual(expert_after, expert_before + 1)
+
+
+    def test_06(self):
+        """
+        审计管理-搜索
+        :return:
+        """
+        auditLog_Page = auditLogPage(self.driver)
+        auditLog_Page.search()
         self.assertNotEqual(1, 2)
+
+
 
     @classmethod
     def tearDownClass(cls):

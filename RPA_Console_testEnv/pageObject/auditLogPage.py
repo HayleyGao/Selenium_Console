@@ -2,7 +2,7 @@ import time
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-
+import os
 
 class auditLogPage:
     def __init__(self, driver):
@@ -12,7 +12,28 @@ class auditLogPage:
         """
         self.driver = driver
 
-    def auditLog_menu(self):
+    def auditLog_list(self):
+        """
+        审计日志-进入列表
+        :return:
+        """
+        self.driver.refresh()
+        time.sleep(2)
+        # 审计日志
+        auditLog_menu_btn = self.driver.find_element(By.XPATH,
+                                                     '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-menu/ul/li[8]')
+        auditLog_menu_btn.click()
+        time.sleep(3)
+
+
+
+    def auditLog_expert_Today(self):
+        """
+        审计日志-导出-今日
+        :return:
+        """
+        self.driver.refresh()
+        time.sleep(2)
         # 审计日志
         auditLog_menu_btn = self.driver.find_element(By.XPATH,
                                                      '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-menu/ul/li[8]')
@@ -23,7 +44,8 @@ class auditLogPage:
         select_menu = self.driver.find_element(By.XPATH,
                                                '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/settings-audit-list/section/div/rpa-time-range/div/nz-select/nz-select-top-control/nz-select-search/input')
         select_menu.click()
-        time.sleep(1)
+        time.sleep(3)
+
         option_item3 = self.driver.find_element(By.XPATH,
                                                 '/html/body/div[2]/div[2]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[3]/div')
         option_item3.click()
@@ -33,15 +55,35 @@ class auditLogPage:
                                               '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/settings-audit-list/section/div/button')
         export_btn.click()
         time.sleep(3)
+
+
+
+    def auditLog_expert_All(self):
+        """
+        审计日志-导出-全部
+        :return:
+        """
+        self.driver.refresh()
+        time.sleep(2)
+        # 审计日志
+        auditLog_menu_btn = self.driver.find_element(By.XPATH,
+                                                     '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-menu/ul/li[8]')
+        auditLog_menu_btn.click()
+        time.sleep(3)
+
+
         # 选择“全部”
-        select_menu2 = self.driver.find_element(By.XPATH,
+        self.driver.refresh()
+        time.sleep(2)
+
+        select_menu2 = self.driver.find_element(By.XPATH,#"/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/settings-audit-list/section/div/rpa-time-range/div/nz-select/nz-select-top-control/nz-select-search/input"
                                                 '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/settings-audit-list/section/div/rpa-time-range/div/nz-select/nz-select-top-control/nz-select-search/input')
         select_menu2.click()
         time.sleep(2)
-        option_item1 = self.driver.find_element(By.XPATH,
-                                                '/html/body/div[2]/div[3]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[1]/div')
+        option_item1 = self.driver.find_element(By.XPATH,#"/html/body/div[2]/div[2]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[1]/div"
+                                                '/html/body/div[2]/div[2]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[1]/div')
         option_item1.click()
-        time.sleep(1)
+        time.sleep(2)
         # 点击“日历组件
         # 开始时间
         # 通过jquery删除readonly属性或者改变readonly属性
@@ -57,7 +99,7 @@ class auditLogPage:
                                                        "/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/settings-audit-list/section/div/rpa-time-range/div/nz-range-picker/div/div[3]/input")
         js2 = 'document.getElementsByTagName("input")[2].removeAttribute("readonly");'
         self.driver.execute_script(js2)
-        calerdate_input_end.send_keys("2021-04-12 12:00")
+        calerdate_input_end.send_keys("2021-05-10 12:00")
         time.sleep(1)
 
         # 点击日历组件的确定按钮
@@ -72,6 +114,8 @@ class auditLogPage:
         export_btn.click()
         time.sleep(3)
 
+
+    def search(self):
         # 点击搜索框
         auditLog_searchBox = self.driver.find_element(By.XPATH,
                                                       '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/settings-audit-list/section/div/div/nz-input-group/input')
@@ -80,3 +124,15 @@ class auditLogPage:
         time.sleep(1)
         auditLog_searchBox.send_keys(Keys.ENTER)
         time.sleep(3)
+
+
+    def isExpert(self,path):
+        """
+        判断是否导出
+        :return:
+        """
+        #path='/Users/hayleygao/Downloads'
+        length=len(os.listdir(path=path))
+        print('length',length)
+        return length
+

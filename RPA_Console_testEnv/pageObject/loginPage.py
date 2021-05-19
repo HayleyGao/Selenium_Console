@@ -3,10 +3,6 @@ import time
 from selenium.webdriver.common.by import By
 
 
-# import  base
-# import tasksManagement
-
-
 class loginPage():
     def __init__(self, driver):
         """
@@ -70,4 +66,4 @@ class loginPage():
         self.password().send_keys(pwd)
         self.driver.implicitly_wait(1)
         self.loginBtn().click()
-        time.sleep(5)
+        time.sleep(3)

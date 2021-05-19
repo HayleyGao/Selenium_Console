@@ -36,7 +36,7 @@ class tenantTest(unittest.TestCase):
 
     def test_03(self):
         """
-        租户管理
+        资产管理
         :return:
         """
         dataAsset_Page = dataAssetPage(self.driver)

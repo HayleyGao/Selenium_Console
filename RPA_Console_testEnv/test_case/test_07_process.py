@@ -36,12 +36,41 @@ class processTest(unittest.TestCase):
 
     def test_03(self):
         """
-        租户管理
+        流程管理
         :return:
         """
         process_Page = processPage(self.driver)
-        process_Page.applications_menu()
+        process_Page.applications_list()
         self.assertNotEqual(1, 2)
+
+    def test_04(self):
+        """
+        流程管理-历史版本
+        :return:
+        """
+        process_Page = processPage(self.driver)
+        process_Page.applications_historyVersion()
+        self.assertNotEqual(1, 2)
+
+    def test_05(self):
+        """
+        流程管理-共享设置
+        :return:
+        """
+        process_Page = processPage(self.driver)
+        process_Page.applications_sharingSetting()
+        self.assertNotEqual(1, 2)
+
+    def test_06(self):
+        """
+        流程管理-搜索
+        :return:
+        """
+        process_Page = processPage(self.driver)
+        process_Page.applications_search()
+        self.assertNotEqual(1, 2)
+
+
 
     @classmethod
     def tearDownClass(cls):

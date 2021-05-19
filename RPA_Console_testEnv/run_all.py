@@ -18,9 +18,9 @@ suite = unittest.TestLoader().discover(test_dir, pattern)
 if __name__ == "__main__":
     # 定义测试报告文件路径
     current_dir = os.path.dirname(os.path.realpath(__file__))
-    report_dir = r"\report"
+    report_dir = r"report"
     now = time.strftime("%Y%m%d-%H%M%S")  # "%Y:%m:%d-%H%M%S"，不要加：，否则不符合文件命名规则。
-    report_name = current_dir + report_dir + os.sep + now + "_report.html"
+    report_name = current_dir + os.sep+report_dir + os.sep + now + "_report.html"
 
     with open(report_name, 'wb') as fp:
         runner = HTMLTestRunner(fp, verbosity=2, title='RPA_Console_Test')

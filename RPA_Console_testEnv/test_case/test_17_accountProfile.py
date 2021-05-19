@@ -35,28 +35,28 @@ class accountProfileTest(unittest.TestCase):
         url_ = ReadConfig().getOptionValue('environment', 'url') + '#/dashboard'
         self.assertEqual(self.driver.current_url, url_)
 
-    def test_03(self):
+    def wtest_03(self):
         jobs_page = jobsPage(self.driver)
         jobs_page.jobs_status_Waiting()
         time.sleep(2)
         status_tag = jobs_page.job_first_record_status_tag()
         self.assertEqual('待执行', status_tag)
 
-    def test_04(self):
+    def wtest_04(self):
         jobs_page = jobsPage(self.driver)
         jobs_page.jobs_status_Succeed()
         time.sleep(2)
         status_tag = jobs_page.job_first_record_status_tag()
         self.assertEqual('成功', status_tag)
 
-    def test_05(self):
+    def wtest_05(self):
         jobs_page = jobsPage(self.driver)
         jobs_page.jobs_status_Terminated()
         time.sleep(2)
         status_tag = jobs_page.job_first_record_status_tag()
         self.assertEqual('已终止', status_tag)
 
-    def test_6(self):
+    def wtest_6(self):
         """
         判断"今天范围"作业是否导出成功
         :return:
@@ -91,7 +91,7 @@ class accountProfileTest(unittest.TestCase):
         job_details = jobs_page.job_first_record_details()
         self.assertEqual('作业详情', job_details)
 
-    def test_09(self):
+    def wtest_09(self):
         """
         判断，更多，查看日志
         :return:
@@ -100,7 +100,7 @@ class accountProfileTest(unittest.TestCase):
         jobs_page.more_job_log()
         self.assertEqual(1, 1)
 
-    def test_10(self):
+    def wtest_10(self):
         """
         搜索框
         :return:

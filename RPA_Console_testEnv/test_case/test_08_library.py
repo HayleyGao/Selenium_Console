@@ -36,12 +36,68 @@ class libraryTest(unittest.TestCase):
 
     def test_03(self):
         """
-        租户管理
+        库管理-列表
         :return:
         """
         library_Page = libraryPage(self.driver)
-        library_Page.library_menu()
+        library_Page.library_list()
+        url_=self.url+'#/library-manage/library-manage-list'
+        self.assertEqual(url_,self.driver.current_url)
+
+
+    def test_04(self):
+        """
+        库管理-历史版本
+        :return:
+        """
+        library_Page = libraryPage(self.driver)
+        library_Page.library_historyVersion()
         self.assertNotEqual(1, 2)
+
+
+    def test_05(self):
+        """
+        库管理-搜索
+        :return:
+        """
+        library_Page = libraryPage(self.driver)
+        library_Page.library_search()
+        self.assertNotEqual(1, 2)
+
+
+    def test_06(self):
+        """
+        库管理-类型-可视化
+        :return:
+        """
+        library_Page = libraryPage(self.driver)
+        library_Page.library_type_Visual()
+        type_text=library_Page.getFirstRecordTypeText()
+        print('type_text',type_text)
+        self.assertEqual('可视化流程库',type_text)
+
+
+    def test_07(self):
+        """
+        库管理-类型-代码
+        :return:
+        """
+        library_Page = libraryPage(self.driver)
+        library_Page.library_type_Code()
+        type_text = library_Page.getFirstRecordTypeText()
+        self.assertEqual('代码流程库',type_text)
+
+    def test_08(self):
+        """
+        库管理-类型-重置（默认显示所有）
+        :return:
+        """
+        library_Page = libraryPage(self.driver)
+        library_Page.library_type_Reset()
+        type_text = library_Page.getFirstRecordTypeText()
+        self.assertIsNotNone(type_text)
+
+
 
     @classmethod
     def tearDownClass(cls):

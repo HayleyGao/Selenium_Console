@@ -39,29 +39,30 @@ class task_timing_dynamic_Test(unittest.TestCase):
         self.assertEqual(self.driver.current_url, url_)
 
 
-    def test_03(self):
+    def wtest_03(self):
         task_page = tasksPage(self.driver)
         task_name_str = 'task_' + str(math.ceil(time.time())) + '_dynamicAllocation'
         task_page.addTask_byTiming_dynamicAllocation_Every(task_name_str)
         task_name_latest = task_page.getLatestTask()
         self.assertEqual(task_name_str, task_name_latest, '新建任务失败。')
 
-    def test_04(self):
+    def wtest_04(self):
         task_page = tasksPage(self.driver)
         task_name_str = 'task_' + str(math.ceil(time.time())) + '_dynamicAllocation'
         task_page.addTask_byTiming_dynamicAllocation_Daily(task_name_str)
         task_name_latest = task_page.getLatestTask()
         self.assertEqual(task_name_str, task_name_latest, '新建任务失败。')
 
-    def test_05(self):
+    def wtest_05(self):
         task_page = tasksPage(self.driver)
+
         task_name_str = 'task_' + str(math.ceil(time.time())) + '_dynamicAllocation'
 
         task_page.addTask_byTiming_dynamicAllocation_Weekly(task_name_str)
         task_name_latest = task_page.getLatestTask()
         self.assertEqual(task_name_str, task_name_latest, '新建任务失败。')
 
-    def test_06(self):
+    def wtest_06(self):
         task_page = tasksPage(self.driver)
         task_name_str = 'task_' + str(math.ceil(time.time())) + '_dynamicAllocation'
 

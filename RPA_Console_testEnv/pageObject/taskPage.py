@@ -164,6 +164,9 @@ class tasksPage:
         :param driver:
         :return:
         """
+        #刷新一下
+        self.driver.refresh()
+        time.sleep(2)
         # #进入任务管理模块
         # 点击进入任务列表
         self.task_menu_list()
@@ -222,9 +225,9 @@ class tasksPage:
         :return:
         """
         self.addTask_byTiming_dynamicAllocation(task_name_str)
-        self.addTask_byTiming_Weekly(self.driver)
-        self.addTask_notification_switchBtn(self.driver)
-        self.addTask_submit_confirmBtn(self.driver)
+        self.addTask_byTiming_Weekly()
+        self.addTask_notification_switchBtn()
+        self.addTask_submit_confirmBtn()
 
     def addTask_byTiming_dynamicAllocation_Monthly(self,task_name_str):
         """
@@ -410,7 +413,7 @@ class tasksPage:
         start_ExecuteTime_byDay = self.driver.find_element(By.XPATH,
                                                            '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-create-task/div/nz-spin/div/main/div[2]/rpa-edit-task-type/div/form/nz-form-item[2]/nz-form-control/div/div/div/div[2]/div[1]/nz-form-control/div/div/rpa-full-time/nz-date-picker/div/div/input')
         start_ExecuteTime_byDay.clear()
-        start_ExecuteTime_byDay.send_keys("2021-04-16")
+        start_ExecuteTime_byDay.send_keys("2021-08-16")
         time.sleep(1)
         start_ExecuteTime_byDay.send_keys(Keys.ENTER)
         time.sleep(1)
@@ -420,7 +423,7 @@ class tasksPage:
         start_ExecuteTime_bySecond.send_keys("16:00")
         time.sleep(1)
         start_ExecuteTime_bySecond.send_keys(Keys.ENTER)
-        time.sleep(1)
+        time.sleep(2)
 
     def byTiming_selectRobot(self):
         """
@@ -448,6 +451,9 @@ class tasksPage:
         """
         # #进入任务管理模块
         # 点击进入任务列表
+        self.driver.refresh()
+        time.sleep(2)
+
         self.task_menu_list()
 
         # 新增任务
@@ -630,8 +636,9 @@ class tasksPage:
         :param self.driver:
         :return:
         """
+        time.sleep(1)
         # 作业执行中，录制计算机屏幕，开关按钮
-        record_screen_during_running_job_btn = self.driver.find_element(By.XPATH,
+        record_screen_during_running_job_btn = self.driver.find_element(By.XPATH,#"/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-create-task/div/nz-spin/div/main/div[2]/rpa-edit-task-recording/form/nz-form-item[1]/nz-form-control/div/div/nz-switch/button"
                                                                         '/html/body/rpa-root/layout-default/bixi-layout/div/bixi-layout-content/rpa-create-task/div/nz-spin/div/main/div[2]/rpa-edit-task-recording/form/nz-form-item[1]/nz-form-control/div/div/nz-switch/button')
         record_screen_during_running_job_btn.click()
         time.sleep(1)

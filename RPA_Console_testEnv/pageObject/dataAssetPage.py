@@ -44,7 +44,7 @@ class dataAssetPage:
         ActionChains(self.driver).move_to_element(asset_type_select).perform()
         # 下拉框选择，此处选择“文本”item[2] #"/html/body/div[2]/div[3]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[2]"
         item_text = self.driver.find_element(By.XPATH,
-                                             '/html/body/div[2]/div[3]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[2]')
+                                             '/html/body/div[2]/div[2]/div/nz-option-container/div/cdk-virtual-scroll-viewport/div[1]/nz-option-item[2]')
         item_text.click()
         time.sleep(1)
 

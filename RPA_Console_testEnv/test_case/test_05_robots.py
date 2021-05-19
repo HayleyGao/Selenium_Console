@@ -38,7 +38,7 @@ class robotsTest(unittest.TestCase):
         self.assertEqual(self.driver.current_url, url_)
 
 
-    def wtest_03(self):
+    def test_03(self):
         """
         搜索，是否包含搜索的内容。
         :return:
@@ -51,32 +51,62 @@ class robotsTest(unittest.TestCase):
 
 
 
-    def wtest_04(self):
-        robots_page = robotsPage(self.driver)
-        robots_page.robots_list()
-        url_=self.url+"#/rpa/robot-list"
-        print('url_',url_)
-        self.assertEqual(self.driver.current_url,url_ )
-
-    def wtest_05(self):
+    def test_04(self):
+        """
+        机器人管理-查看作业
+        :return:
+        """
         robots_page = robotsPage(self.driver)
         robots_page.viewJobs()
+        url_=self.url+'#/rpa/robot-list'
+        self.assertEqual(url_,self.driver.current_url)
 
+    def wtest_05(self):
+        """
+        机器人管理-查看作业-不同状态作业的日志
+        :return:
+        """
+
+        robots_page = robotsPage(self.driver)
+        robots_page.viewJobs()
+        url_=self.url+'#/rpa/robot-list'
+        self.assertEqual(url_,self.driver.current_url)
+
+
+
+    @unittest.skip
     def test_06(self):
+        """
+        机器人管理-更多
+        :return:
+        """
         robots_page = robotsPage(self.driver)
         robots_page.more()
 
+
+
     def test_07(self):
+        """
+        机器人状态-在线状态。
+        :return:
+        """
         robots_page = robotsPage(self.driver)
         robots_page.status_online()
         status_text=robots_page.getRobotStatusText()
         self.assertEqual('在线',status_text)
 
+
     def test_08(self):
+        """
+        没有禁用状态的机器人，会出现"空态图"
+        :return:
+        """
         robots_page = robotsPage(self.driver)
         robots_page.status_disable()
-        status_text=robots_page.getRobotStatusText()
-        self.assertEqual('禁用',status_text)
+        status_text=robots_page.emptyGraph()
+        self.assertEqual('暂无数据',status_text)
+
+
 
     def test_09(self):
         robots_page = robotsPage(self.driver)
@@ -86,9 +116,11 @@ class robotsTest(unittest.TestCase):
 
 
 
+
     @classmethod
     def tearDownClass(cls):
         cls.driver.quit()
+
 
 
 if __name__ == "__main__":
